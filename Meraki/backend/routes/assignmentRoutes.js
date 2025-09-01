@@ -1,7 +1,9 @@
 import express from 'express';
 import {
     createAssignment,
-    
+    getAssignmentsByCourse,
+    submitAssignment,
+    deleteAssignment,
     updateAssignment
 } from '../controllers/assignmentController.js';
 import {authMiddleware} from '../middleware/authMiddleware.js';

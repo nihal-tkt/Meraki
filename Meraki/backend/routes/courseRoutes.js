@@ -27,6 +27,13 @@ router.get('/', authMiddleware, getAllCourses);
 router.get('/:courseId', authMiddleware, getCourseById);
 
 
+
+// Update a course (accessible only by instructors)
+router.patch('/:courseId', authMiddleware, roleMiddleware('instructor'), upload.single('thumbnail'), updateCourse);
+
+// Delete a course (accessible only by instructors)
+router.delete('/:courseId', authMiddleware, roleMiddleware('instructor'), deleteCourse);
+
 // Enroll in a course (accessible only by students)
 router.post('/:courseId/enroll', authMiddleware, roleMiddleware('student'), enrollInCourse);
 
