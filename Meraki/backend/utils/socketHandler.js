@@ -9,34 +9,7 @@ export const socketHandler = (io) => {
         console.log('A user connected');
 
         // Join a chat room for a specific course
-        socket.on('joinChat', async (courseId, userId) => {
-            // Check if the course exists
-            const course = await Course.findById(courseId);
-            if (!course) {
-                socket.emit('error', { message: 'Course not found' });
-                return;
-            }
-
-            // Check if the user exists
-            const user = await User.findById(userId);
-            if (!user) {
-                socket.emit('error', { message: 'User not found' });
-                return;
-            }
-
-            // Join the room
-            socket.join(courseId);
-            console.log(`User ${userId} joined chat for course ${courseId}`);
-
-            // Optionally, send the course info to the user
-            socket.emit('courseInfo', { courseName: course.name });
-
-            // Fetch and send previous chat messages
-            const chat = await Chat.findOne({ course: courseId });
-            if (chat) {
-                socket.emit('previousMessages', chat.messages);
-            }
-        });
+        
 
         // Handle receiving messages from users and broadcast to course chat room
         socket.on('sendMessage', async (courseId, userId, messageText) => {
