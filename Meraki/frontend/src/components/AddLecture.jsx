@@ -52,7 +52,40 @@ const AddLecture = () => {
         }
     };
 
-    
+    return (
+        <div className="container mx-auto p-6">
+            <h2 className="text-2xl font-bold mb-4">Add Lecture</h2>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+            {message && <p className="text-green-500 mb-4">{message}</p>}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                    <label htmlFor="title" className="block text-sm font-medium mb-1">
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="w-full border rounded px-3 py-2 text-black"
+                        placeholder="Enter lecture title"
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="description" className="block text-sm font-medium mb-1">
+                        Description
+                    </label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="w-full border rounded px-3 py-2 text-black"
+                        placeholder="Enter lecture description"
+                        required
+                    />
+                </div>
                 <div>
                     <label htmlFor="file" className="block text-sm font-medium mb-1">
                         Upload File
